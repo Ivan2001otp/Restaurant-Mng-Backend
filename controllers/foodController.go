@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"time"
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -72,7 +72,7 @@ func GetFoods() gin.HandlerFunc {
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "error occured while listing food items !"})
-			log.Fatal(err)
+			// log.Fatal(err)
 			return
 		}
 
@@ -187,7 +187,7 @@ func UpdateFood() gin.HandlerFunc {
 		var updateObj primitive.D
 
 		if food.Name!=nil{
-			updateObj = append(updateObj, bson.E{"name",food.Name});
+			updateObj = append(updateObj, bson.E{Key:"name",Value:food.Name});
 		}
 
 		if food.Price != nil{
@@ -228,7 +228,7 @@ func UpdateFood() gin.HandlerFunc {
 			ctx,
 			filter,
 			bson.D{
-				{"$set",updateObj},
+				{Key: "$set",Value: updateObj},
 			},
 			&option,
 		)

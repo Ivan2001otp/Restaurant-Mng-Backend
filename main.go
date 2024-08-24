@@ -1,12 +1,11 @@
 package main
 
 import (
-	"Restaurant-Backend/middleware"
+	middleware "Restaurant-Backend/middleware"
 	routes "Restaurant-Backend/routes"
-	"Restaurant-Backent/database"
+	"Restaurant-Backend/database"
 	"fmt"
 	"os"
-
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 )
